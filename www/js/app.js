@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var ionicApp = angular.module('starter', ['ionic']);
+var ionicApp = angular.module('starter', ['ionic', 'ngCordova']);
 
 ionicApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,12 +18,33 @@ ionicApp.run(function($ionicPlatform) {
   });
 });
 
-ionicApp.controller('ExampleController', function($scope){
+ionicApp.controller('ExampleController', function($scope, $cordovaCamera){
   $scope.images = [];
 
   $scope.loadImages = function(){
-    for(var i = 0; i < 100; i++){
+    for(var i = 0; i < 4; i++){
       $scope.images.push({id: i, src: 'http://placehold.it/50x50'})
     }
   }
+
+  $scope.takePicture = function() {
+        var options = {
+            quality : 75,
+            destinationType : Camera.DestinationType.DATA_URL,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
+
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        }, function(err) {
+            // An error occured. Show a message to the user
+            alert('An error occurred while capturing image.');
+        });
+    }
 });
