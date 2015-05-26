@@ -42,8 +42,7 @@ ionicApp.controller('ExampleController', function($scope, $cordovaCamera, $windo
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
-            var ocrString = $window.OCRAD(imageData);
-            console.log('ocrString ------>' + ocrString);
+            $scope.ocrString = $window.OCRAD(imageData);
         }, function(err) {
             // An error occured. Show a message to the user
             alert('An error occurred while capturing image.');
