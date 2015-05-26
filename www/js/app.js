@@ -18,7 +18,7 @@ ionicApp.run(function($ionicPlatform) {
   });
 });
 
-ionicApp.controller('ExampleController', function($scope, $cordovaCamera){
+ionicApp.controller('ExampleController', function($scope, $cordovaCamera, $window){
   $scope.images = [];
 
   $scope.loadImages = function(){
@@ -35,13 +35,15 @@ ionicApp.controller('ExampleController', function($scope, $cordovaCamera){
             allowEdit : true,
             encodingType: Camera.EncodingType.JPEG,
             targetWidth: 300,
-            targetHeight: 300,
+            targetHeight: 400,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
+            var ocrString = $window.OCRAD(imageData);
+            console.log('ocrString ------>' + ocrString);
         }, function(err) {
             // An error occured. Show a message to the user
             alert('An error occurred while capturing image.');

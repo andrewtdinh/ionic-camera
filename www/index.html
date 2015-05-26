@@ -17,17 +17,17 @@
 
     <!-- your app's js -->
     <script src='js/app.js'></script>
+    <script src='lib/ocrad-bower/ocrad.js'></script>
   </head>
   <body ng-app='starter'>
-
     <ion-pane>
-      <ion-header-bar class='bar-stable'>
+      <ion-header-bar class='bar bar-header bar-calm bar-center'>
         <h1 class='title center'>Ionic Blank Starter</h1>
       </ion-header-bar>
       <ion-content ng-controller='ExampleController' ng-init='loadImages()'>
         <img ng-show="imgURI" ng-src="{{imgURI}}">
         <img ng-show="!imgURI" ng-src="http://placehold.it/300x300">
-        <button class="button" ng-click="takePicture()">Take Picture</button>
+        <button class="button button-calm button-block" ng-click="takePicture()">Take Picture</button>
         <!-- <div class='row' ng-repeat='image in images' ng-if='$index % 4 === 0'>
           <div class='col col-25' ng-if='$index < images.length'>
             <img ng-src='{{images[$index].src}}' width='100%' />
